@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dragon Boat Practice Schedule</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "Noto Sans TC", "sans-serif"],
+                        "sans": ["Lexend", "Noto Sans TC", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', 'Noto Sans TC', sans-serif;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body  class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display antialiased selection:bg-primary selection:text-white">>
+    <div
+        class="relative flex h-auto min-h-screen w-full flex-col mx-auto max-w-md bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden border-x border-slate-100 dark:border-slate-800">
+        <!-- TopAppBar -->
+        <div
+            class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 p-4 pb-2">
+            <div class="flex items-center justify-between">
+                <h2 class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em] flex-1">
+                    練習排程</h2>
+                <div class="flex items-center justify-end gap-3">
+                    <button
+                        class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0d141b] dark:text-white transition-colors">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center size-10 rounded-full bg-primary text-white shadow-lg shadow-primary/30 hover:bg-blue-600 transition-all">
+                        <span class="material-symbols-outlined">add</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- SegmentedButtons -->
+        <div class="flex px-4 py-4 bg-white dark:bg-slate-900">
+            <div class="flex h-10 flex-1 items-center justify-center rounded-lg bg-[#e7edf3] dark:bg-slate-800 p-1">
+                <label
+                    class="group relative flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-2 text-[#4c739a] dark:text-slate-400 font-medium transition-all">
+                    <input checked="" class="peer invisible absolute w-0" name="view-toggle" type="radio"
+                        value="week" />
+                    <span
+                        class="relative z-10 truncate text-sm transition-colors peer-checked:text-[#0d141b] dark:peer-checked:text-white">本週</span>
+                    <div
+                        class="absolute inset-0 hidden bg-white dark:bg-slate-700 shadow-sm rounded-md peer-checked:block">
+                    </div>
+                </label>
+                <label
+                    class="group relative flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-2 text-[#4c739a] dark:text-slate-400 font-medium transition-all">
+                    <input class="peer invisible absolute w-0" name="view-toggle" type="radio" value="next-week" />
+                    <span
+                        class="relative z-10 truncate text-sm transition-colors peer-checked:text-[#0d141b] dark:peer-checked:text-white">下週</span>
+                    <div
+                        class="absolute inset-0 hidden bg-white dark:bg-slate-700 shadow-sm rounded-md peer-checked:block">
+                    </div>
+                </label>
+                <label
+                    class="group relative flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-2 text-[#4c739a] dark:text-slate-400 font-medium transition-all">
+                    <input class="peer invisible absolute w-0" name="view-toggle" type="radio" value="month" />
+                    <span
+                        class="relative z-10 truncate text-sm transition-colors peer-checked:text-[#0d141b] dark:peer-checked:text-white">月曆</span>
+                    <div
+                        class="absolute inset-0 hidden bg-white dark:bg-slate-700 shadow-sm rounded-md peer-checked:block">
+                    </div>
+                </label>
+            </div>
+        </div>
+        <!-- Calendar Preview (Compact) -->
+        <div class="px-4 pb-2">
+            <div class="bg-background-light dark:bg-slate-800/50 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <button class="p-1 rounded-full hover:bg-white dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                    </button>
+                    <p class="text-[#0d141b] dark:text-white text-base font-bold leading-tight">2023年 10月</p>
+                    <button class="p-1 rounded-full hover:bg-white dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    </button>
+                </div>
+                <!-- Weekly Strip -->
+                <div class="grid grid-cols-7 gap-1 text-center">
+                    <!-- Days of Week -->
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">日</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">一</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">二</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">三</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">四</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">五</div>
+                    <div class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-2">六</div>
+                    <!-- Dates -->
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-slate-400 dark:text-slate-600">22</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-slate-400 dark:text-slate-600">23</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-[#0d141b] dark:text-slate-300 font-medium">24</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-[#0d141b] dark:text-slate-300 font-medium">25</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-[#0d141b] dark:text-slate-300 font-medium">26</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full bg-primary text-white text-sm font-bold shadow-md shadow-blue-500/30">27</button>
+                    <button
+                        class="h-9 w-full flex items-center justify-center rounded-full text-sm text-[#0d141b] dark:text-slate-300 font-medium">28</button>
+                </div>
+                <!-- Expanded Calendar Trigger -->
+                <div class="flex justify-center mt-2">
+                    <div class="h-1 w-10 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Schedule List -->
+        <div class="flex flex-col flex-1 pb-20">
+            <!-- Date Section 1 -->
+            <div
+                class="sticky top-[72px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm z-40 px-4 py-3 border-b border-slate-50 dark:border-slate-800/50">
+                <h3 class="text-[#0d141b] dark:text-white text-lg font-bold leading-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">calendar_today</span>
+                    10月27日 (五)
+                    <span class="text-xs font-normal text-white bg-primary px-2 py-0.5 rounded-full ml-2">今日</span>
+                </h3>
+            </div>
+            <div class="px-4 py-2 flex flex-col gap-3">
+                <!-- Card Item 1: Morning Practice -->
+                <div
+                    class="group relative flex flex-col gap-3 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-blue-50 dark:bg-blue-900/30 text-primary p-1.5 rounded-lg">
+                                <span class="material-symbols-outlined text-[20px]">wb_twilight</span>
+                            </span>
+                            <div>
+                                <h4 class="text-[#0d141b] dark:text-white font-bold text-base">晨間水上訓練</h4>
+                                <p class="text-primary font-semibold text-sm">05:30 - 07:30</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2.5 py-1 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs font-bold border border-green-100 dark:border-green-800">
+                            已確認
+                        </span>
+                    </div>
+                    <div class="h-px bg-slate-100 dark:bg-slate-700 w-full"></div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                <span class="truncate max-w-[100px]">碧潭西岸</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">groups</span>
+                                <span>18/22 人</span>
+                            </div>
+                        </div>
+                        <button class="text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card Item 2: Evening Gym -->
+                <div
+                    class="group relative flex flex-col gap-3 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow opacity-70">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-orange-50 dark:bg-orange-900/30 text-orange-500 p-1.5 rounded-lg">
+                                <span class="material-symbols-outlined text-[20px]">fitness_center</span>
+                            </span>
+                            <div>
+                                <h4 class="text-[#0d141b] dark:text-white font-bold text-base">陸上體能 (自主)</h4>
+                                <p class="text-slate-500 dark:text-slate-400 font-medium text-sm">19:00 - 20:30</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-xs font-bold">
+                            已結束
+                        </span>
+                    </div>
+                    <div class="h-px bg-slate-100 dark:bg-slate-700 w-full"></div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                <span>隊部健身房</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">groups</span>
+                                <span>8/10 人</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Date Section 2 -->
+            <div
+                class="sticky top-[72px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm z-40 px-4 py-3 border-b border-t border-slate-50 dark:border-slate-800/50 mt-2">
+                <h3 class="text-[#0d141b] dark:text-white text-lg font-bold leading-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-slate-400 text-xl">calendar_today</span>
+                    10月28日 (六)
+                </h3>
+            </div>
+            <div class="px-4 py-2 flex flex-col gap-3">
+                <!-- Card Item 3: Weekend Long Paddle -->
+                <div
+                    class="group relative flex flex-col gap-3 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow">
+                    <!-- Alert Banner -->
+                    <div class="absolute top-0 right-0 p-2">
+                        <span class="flex h-2 w-2 relative">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-blue-50 dark:bg-blue-900/30 text-primary p-1.5 rounded-lg">
+                                <span class="material-symbols-outlined text-[20px]">sailing</span>
+                            </span>
+                            <div>
+                                <h4 class="text-[#0d141b] dark:text-white font-bold text-base">週末長距離練習</h4>
+                                <p class="text-primary font-semibold text-sm">06:00 - 09:00</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary text-xs font-bold border border-blue-100 dark:border-blue-800">
+                            報名中
+                        </span>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/20 rounded-md p-2 flex items-start gap-2">
+                        <span class="material-symbols-outlined text-red-500 text-sm mt-0.5">warning</span>
+                        <p class="text-xs text-red-600 dark:text-red-300 leading-snug">
+                            人數不足警告：目前僅 12 人，需至少 16 人才能出船。請儘速報名。
+                        </p>
+                    </div>
+                    <div class="h-px bg-slate-100 dark:bg-slate-700 w-full"></div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                <span>基隆河 (三腳渡)</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-red-500 font-medium">
+                                <span class="material-symbols-outlined text-[18px]">groups</span>
+                                <span>12/22 人</span>
+                            </div>
+                        </div>
+                        <button
+                            class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg shadow-sm hover:bg-blue-600">
+                            報名
+                        </button>
+                    </div>
+                </div>
+                <!-- Card Item 4: Afternoon -->
+                <div
+                    class="group relative flex flex-col gap-3 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-purple-50 dark:bg-purple-900/30 text-purple-600 p-1.5 rounded-lg">
+                                <span class="material-symbols-outlined text-[20px]">pool</span>
+                            </span>
+                            <div>
+                                <h4 class="text-[#0d141b] dark:text-white font-bold text-base">室內划槳池</h4>
+                                <p class="text-slate-500 dark:text-slate-400 font-medium text-sm">14:00 - 16:00</p>
+                            </div>
+                        </div>
+                        <span
+                            class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-xs font-bold">
+                            候補
+                        </span>
+                    </div>
+                    <div class="h-px bg-slate-100 dark:bg-slate-700 w-full"></div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                <span>運動中心 B1</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">groups</span>
+                                <span>6/6 (滿)</span>
+                            </div>
+                        </div>
+                        <button class="text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined">arrow_forward_ios</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Empty State for Sunday -->
+            <div
+                class="sticky top-[72px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm z-40 px-4 py-3 border-b border-t border-slate-50 dark:border-slate-800/50 mt-2">
+                <h3 class="text-[#0d141b] dark:text-white text-lg font-bold leading-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-slate-400 text-xl">calendar_today</span>
+                    10月29日 (日)
+                </h3>
+            </div>
+            <div class="flex flex-col items-center justify-center py-10 px-4 text-center">
+                <div class="size-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-slate-300 text-4xl">sailing</span>
+                </div>
+                <p class="text-[#0d141b] dark:text-white font-medium mb-1">尚無練習安排</p>
+                <p class="text-slate-400 text-sm mb-4">享受你的週末休息日，或安排新的加練。</p>
+                <button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                    <span class="material-symbols-outlined text-sm">add_circle</span>
+                    新增練習
+                </button>
+            </div>
+        </div>
+        <!-- Floating Action Button (Optional for Mobile feel) -->
+        <div class="fixed bottom-6 right-6 z-50 md:hidden">
+            <button
+                class="flex items-center justify-center size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/40 hover:bg-blue-600 transition-all hover:scale-105 active:scale-95">
+                <span class="material-symbols-outlined text-2xl">add</span>
+            </button>
+        </div>
+    </div>
+       <nav
+            class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-2 z-30">
+            <ul class="flex justify-between items-center h-16">
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors" href="index.html">
+                        <span class="material-symbols-outlined filled text-[26px]">home</span>
+                        <span class="text-[10px] font-bold">首頁</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-primary"
+                        href="person.html">
+                        <span class="material-symbols-outlined text-[26px]">groups</span>
+                        <span class="text-[10px] font-medium">隊員</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors"
+                        href="calendar.html">
+                        <span class="material-symbols-outlined text-[26px]">calendar_month</span>
+                        <span class="text-[10px] font-medium">行事曆</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors"
+                        href="boat.html">
+                        <span class="material-symbols-outlined text-[26px]">settings</span>
+                        <span class="text-[10px] font-medium">設定</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</body>
+
+</html>

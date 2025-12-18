@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>隊伍管理 - Dragon Boat Team</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "Noto Sans TC", "sans-serif"],
+                        "sans": ["Lexend", "Noto Sans TC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display antialiased">
+    <div
+        class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+        <div
+            class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 p-4 pb-2">
+            <div class="flex items-center justify-between">
+                <div
+                    class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer transition-opacity hover:opacity-70">
+                   <a href="index.html">
+                    <span class="material-symbols-outlined text-2xl">arrow_back_ios</span>
+                   </a> 
+                </div>
+                <h2
+                    class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight flex-1 text-center">
+                    隊伍管理</h2>
+                <div class="flex size-12 items-center justify-end">
+                    <button
+                        class="flex items-center justify-center rounded-full size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
+                        <span class="material-symbols-outlined">add</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="px-4 py-4 bg-background-light dark:bg-background-dark">
+            <label class="flex flex-col w-full">
+                <div
+                    class="flex w-full items-stretch rounded-xl h-12 bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all overflow-hidden">
+                    <div class="text-slate-400 flex items-center justify-center pl-4 pr-2">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                    <input
+                        class="flex w-full min-w-0 flex-1 bg-transparent border-none text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-0 px-2 text-base font-normal h-full"
+                        placeholder="搜尋隊員姓名或位置" value="" />
+                </div>
+            </label>
+        </div>
+        <div class="flex gap-3 px-4 pb-4 overflow-x-auto no-scrollbar bg-background-light dark:bg-background-dark">
+            <button
+                class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-5 shadow-sm shadow-primary/30 transition-transform active:scale-95">
+                <p class="text-white text-sm font-medium">全部</p>
+            </button>
+            <button
+                class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
+                <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">左槳</p>
+            </button>
+            <button
+                class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
+                <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">右槳</p>
+            </button>
+            <button
+                class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
+                <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">鼓手</p>
+            </button>
+            <button
+                class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-5 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
+                <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">舵手</p>
+            </button>
+        </div>
+        <div class="px-4 py-2 bg-background-light dark:bg-background-dark">
+            <div class="flex justify-between items-end">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">隊員名單</h3>
+                <span class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-0.5">24 人</span>
+            </div>
+        </div>
+        <div class="flex flex-col gap-1 pb-20">
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a confident male dragon boat paddler"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDsLMr05QOlRrVdGN36_Q3_4dTo-P6jS8pLZOkgu2xdLWeUyoVVOEsyzM73_Ocp8uXVe4n6nyGEWWNiwQ0LZtxhXf8AfyXkHr0Viv8NUR1x_MESNezkB6ZQjUjA54xrGWoY1Jp0InQFLN6W1dGg31x7suyRr7CQqeEedm-Qy0Ic6haznTapjlwS3esq9PD31kTBst7CVaRxt-ThpojvF52HtFYZrUwjO7BNQ0wXJ8MdbAJbWsCtTJVvIPcPXXq1PJptMsSNICHqDgg");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">陳志豪</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">左槳</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">可出席 • 上次出席
+                        2天前</p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="78" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a female athlete smiling"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfMByMlnWEVZXLwq4u7pCK8MfCBoaUCOyIdZfpF7McV73DTUqM6X7FCDkb4P-PCo3P5A86g71qqLep4tdzzTC55jSUlZnH8-qnL7-N0Avb9nmB-QZXTut0QWPJQIxk4hh_WGWrF1aaoVb71Eh2rI2z-leT9L-zSk3sMV60xZJPUwal4W4VN1fsC1iowTiR1VhQ7if9JxqAJNVNm0uaFto-5USIsxF8RNrym7bquQbbXGdv9Lfrjr-tHxPlAUvAkbJBpwWtFWydIDw");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">林雅婷</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300">右槳</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">可出席 • 隊長</p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="52" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a focused man looking forward"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCvEZJzVc4dilFOLQ5d6PG9efdDeEhEiESHO4y9n96N6kl3_QpEcLYFBzEmCuXvyAgw3JiHx9D3yPITAQhzEoaPIIKMBtVRI-rUyr_nny6rgg5GExKKFfLgppNVdypOQvLQQscXRvEJ95ppU87Ta7W-tGrRjKR9QZQLhEpB1PBt1xjlFgB_RcRbnLaR3ayPRK4Owl7lp-zbueB3USW5Bkq4EK34n0iAHVL_IOOI8yE4LGotRew4ISRcuUsYE9b3fIXoXDHrFt04N0w");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-gray-400 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">張偉德</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">鼓手</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">請假 • 受傷休養中
+                    </p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="65" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a young athletic woman"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBge224gu1qLHN2V1bH4f-l0_Tmvn6ZIY3IjVrNolB2UkHU4uPJO_IoSZJ3XrChHaYRMT0NR-bgTdpPdoXt1winvuyGMZlckvfl-TjmaQWaDlJFiSDhbV0paoZapq9zqZS0m-UnLO7zi98gwRm7DOXA-kvmZd3UANm9aC7M_dAqW2FxBCzBMULAwHarrozFTFFzPY11SVMGAsp4hFH3zSaqfP-CkHJ5T4Dn5TTyb2zyRYzEPvl-e-LksbLzQAioZePxe9Pdr6iOrbQ");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">黃怡君</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">左槳</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">可出席</p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="55" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a serious middle-aged man"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoiSgXEP-wAQuR-KJF-kfrvvTEzA1fqkDcWM8QkWVUvngCS8YJgKgxdBHEWJgWj0PWXv8yqccta9jbdnmxEO6-g9-Xdab6-GzcLeJRe2b4-ilrBpxZKIknNvfBniye90FKZU02EdQ1N3MDvc4rkYhJosA9JdDdZVvsACCg8mdKy3e85s4ICQ3_6LB-IOsTDwSY6vEYABmwG-zqZJ5zfXS36xUdS0RF0ECtFxKBwC7Bc_2yANbZ4AXhhSkrEZYKFf1ErbfvhbH-8fc");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">劉家豪</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300">舵手</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">可出席 • 需提早離開
+                    </p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="85" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+            <div
+                class="group flex items-center gap-4 bg-background-light dark:bg-background-dark hover:bg-slate-50 dark:hover:bg-gray-800/50 px-4 py-3 cursor-pointer transition-colors border-b border-slate-100 dark:border-gray-800/50">
+                <div class="relative">
+                    <div class="bg-center bg-no-repeat bg-cover rounded-full h-14 w-14 ring-2 ring-white dark:ring-gray-700 shadow-sm"
+                        data-alt="Profile picture of a smiling man with glasses"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFMN5jH2vVE9z_FHGXWWODlEftzrBguPFJpCrxb5DhlU_XoN4EKdQrdI7duQzxdawNm6_h5RiSPBDdIoLrnov2sd2xHIzsHHLUJ8W5spr-ou4e9N1SJpO2l61tRRtFaXqawFB_6wuiYRCbPJ-B30ydD4_PeyQfum50M3Vv3I4Anm0XRvHoakb5Rofxg9FQq2eS3rPjiVlyea6MC7YgI1hfAta1PaZAI6-Ggg9eBkTE9Tk11QvZpawbxnL5RLkzCvUXuZtOzAv5KsM");'>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 size-3.5 bg-red-500 border-2 border-white dark:border-gray-900 rounded-full">
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">吳志明</p>
+                        <span
+                            class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300">右槳</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-0.5">未回應</p>
+                </div>
+                <div class="shrink-0 flex items-center mr-2">
+                    <div
+                        class="flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm group-focus-within:border-primary group-focus-within:ring-1 group-focus-within:ring-primary transition-all">
+                        <input
+                            class="w-10 text-right bg-transparent border-none p-0 text-sm font-bold text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-300"
+                            placeholder="0" type="number" value="72" />
+                        <span class="text-slate-400 dark:text-slate-500 text-xs font-medium ml-1">kg</span>
+                    </div>
+                </div>
+                <div class="shrink-0 text-slate-400 dark:text-slate-600">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </div>
+            </div>
+        </div>
+    </div>
+            <nav
+            class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-2 z-30">
+            <ul class="flex justify-between items-center h-16">
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors" href="index.html">
+                        <span class="material-symbols-outlined filled text-[26px]">home</span>
+                        <span class="text-[10px] font-bold">首頁</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-primary"
+                        href="person.html">
+                        <span class="material-symbols-outlined text-[26px]">groups</span>
+                        <span class="text-[10px] font-medium">隊員</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors"
+                        href="calendar.html">
+                        <span class="material-symbols-outlined text-[26px]">calendar_month</span>
+                        <span class="text-[10px] font-medium">行事曆</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col items-center gap-1 text-text-sub-light dark:text-text-sub-dark hover:text-primary transition-colors"
+                        href="boat.html">
+                        <span class="material-symbols-outlined text-[26px]">settings</span>
+                        <span class="text-[10px] font-medium">設定</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</body>
+
+</html>
